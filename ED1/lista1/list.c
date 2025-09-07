@@ -205,8 +205,17 @@ int is_sorted(list *l) {
 }
 
 int is_fibonacci(list *l) {
-    // TODO: implement
-    return 0;
+    // if it's empty or it has only 1 element, let's consider it is fibonacci
+    if (l->size == 0 || l->size == 1) {
+        return 1;
+    }
+
+    for (int i = 2; i < l->size; i++) {
+        if (l->array[i] != l->array[i - 1] + l->array[i - 2]) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 int find_position(list *l, V value) {
