@@ -11,22 +11,23 @@ list *create_list() {
     l->array = malloc(sizeof(V) * l->capacity);
     if (l->array == NULL) {
         fprintf(stderr, "Error allocating new list.\n");
-        free_list(l);
+        free_list(&l);
         return NULL;
     }
 
     return l;
 }
 
-void free_list(list *l) {
-    if (l == NULL) {
+// When debugging this function It was apparent that I wan't actually acessing the point to free it, and It seems like I need to use a pointer to pointer to properly acess it and free it
+void free_list(list **l) {
+    if (l == NULL || *l == NULL) {
         fprintf(stderr, "List is already NULL.\n");   
         return;     
     }
-    free(l->array);
-    free(l);
+    free((*l)->array);
+    free((*l));
     // avoid dangling pointer. Not really a problem here, but it's good practice, and if I understood it right, the way I implement with full freedom to choose functions can actually cause the dangling pointer. Must remember to ask Max
-    l = NULL;  
+    *l = NULL;  
 }
 
 void insert_end(list *l, V value) {
@@ -74,12 +75,12 @@ void insert_at(list *l, V value, int index) {
     for (int i = l->size; i > index; i--) {
         l->array[i] = l->array[i - 1];
     }
-    l->array = value;
+    l->array[index] = value;
     l->size++;
 }
 
 void update_at(list *l, V value, int index) {
-    if (index < 0 || index > l->size) {
+    if (index < 0 || index >= l->size) {
         fprintf(stderr, "Invalid index %d. Valid range: 0 to %d\n", index, l->size);
         return;
     }
@@ -91,7 +92,7 @@ V get_first(list *l) {
         fprintf(stderr, "List is empty\n");
         return 0;
     }
-    get_at(l, 0);
+    return get_at(l, 0);
 }
 
 V get_last(list *l) {
@@ -99,12 +100,12 @@ V get_last(list *l) {
         fprintf(stderr, "List is empty\n");
         return 0;
     }
-    get_at(l, l->size - 1);
+    return get_at(l, l->size - 1);
 }
 
 V get_at(list *l, int index) {
     if (index < 0 || index >= l-> size) {
-        fprintf(stderr, "Invalid index %d. Valid range is 0 to %s.\n", index, l->size - 1);
+        fprintf(stderr, "Invalid index %d. Valid range is 0 to %d.\n", index, l->size - 1);
         return 0;
     }
     return l->array[index];
@@ -300,7 +301,7 @@ list *difference_lists(list *l, list *a) {
 
     // Checks if it exists in both lists and adds it if it doesn't (the opposite of the intersection)
     for (int i = 0; i < l->size; i++) {
-        if (find_position(a, l->array[i]) != -1) {
+        if (find_position(a, l->array[i]) == -1) {
             insert_end(result, l->array[i]);
         }
     }

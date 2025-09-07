@@ -227,19 +227,19 @@ int main() {
                         case 3: {
                             list *result = union_lists(l, a);
                             print_list(result);
-                            free_list(result);
+                            free_list(&result);
                             break;
                         }
                         case 4: {
                             list *result = intersection_lists(l, a);
                             print_list(result);
-                            free_list(result);
+                            free_list(&result);
                             break;
                         }
                         case 5: {
                             list *result = difference_lists(l, a);
                             print_list(result);
-                            free_list(result);
+                            free_list(&result);
                             break;
                         }
                         default:
@@ -247,14 +247,14 @@ int main() {
                     }
                     // Forgot this part at first, must free the list when
                     // getting out of this submenu
-                    free_list(a);
+                    free_list(&a);
                 }
                 break;
             }
 
             case 0:
                 // Freeing the list before exiting
-                free_list(l);
+                free_list(&l);
                 printf("Exiting...\n");
                 break;
 
