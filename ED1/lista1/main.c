@@ -9,7 +9,7 @@ void print_print_menu();
 void print_advanced_menu();
 
 int main() {
-    list l = *create_list();
+    list *l = create_list();
     int main_option = -1;
 
     while (main_option != 0) {
@@ -33,24 +33,24 @@ int main() {
                         case 1:
                             printf("Enter value: ");
                             scanf("%d", &value);
-                            insert_end(&l, value);
+                            insert_end(l, value);
                             break;
                         case 2:
                             printf("Enter value: ");
                             scanf("%d", &value);
-                            insert_start(&l, value);
+                            insert_start(l, value);
                             break;
                         case 3:
                             printf("Enter value: ");
                             scanf("%d", &value);
                             printf("Enter index: ");
                             scanf("%d", &index);
-                            insert_at(&l, value, index);
+                            insert_at(l, value, index);
                             break;
                         case 4:
                             printf("Enter value: ");
                             scanf("%d", &value);
-                            insert_sorted(&l, value);
+                            insert_sorted(l, value);
                             break;
                         default:
                             printf("Invalid option.\n");
@@ -72,18 +72,18 @@ int main() {
                     int index;
                     switch (sub_option) {
                         case 1:
-                            remove_first(&l);
+                            remove_first(l);
                             break;
                         case 2:
-                            remove_last(&l);
+                            remove_last(l);
                             break;
                         case 3:
                             printf("Enter index: ");
                             scanf("%d", &index);
-                            remove_at(&l, index);
+                            remove_at(l, index);
                             break;
                         case 4:
-                            clear_list(&l);
+                            clear_list(l);
                             break;
                         default:
                             printf("Invalid option.\n");
@@ -106,17 +106,17 @@ int main() {
                     int index;
                     switch (sub_option) {
                         case 1:
-                            value = get_first(&l);
+                            value = get_first(l);
                             printf("First value: %d\n", value);
                             break;
                         case 2:
-                            value = get_last(&l);
+                            value = get_last(l);
                             printf("Last value: %d\n", value);
                             break;
                         case 3:
                             printf("Enter index: ");
                             scanf("%d", &index);
-                            value = get_at(&l, index);
+                            value = get_at(l, index);
                             printf("Value at index %d: %d\n", index, value);
                             break;
                         case 4:
@@ -124,12 +124,12 @@ int main() {
                             scanf("%d", &value);
                             printf("Enter index: ");
                             scanf("%d", &index);
-                            update_at(&l, value, index);
+                            update_at(l, value, index);
                             break;
                         case 5:
                             printf("Enter value to search: ");
                             scanf("%d", &value);
-                            index = find_position(&l, value);
+                            index = find_position(l, value);
                             printf("Position: %d\n", index);
                             break;
                         default:
@@ -152,17 +152,17 @@ int main() {
                     int result;
                     switch (sub_option) {
                         case 1:
-                            printf("List size: %d\n", list_size(&l));
+                            printf("List size: %d\n", list_size(l));
                             break;
                         case 2:
-                            printf("Is empty: %d\n", is_empty(&l));
+                            printf("Is empty: %d\n", is_empty(l));
                             break;
                         case 3:
-                            result = is_sorted(&l);
+                            result = is_sorted(l);
                             printf("Is sorted: %d\n", result);
                             break;
                         case 4:
-                            result = is_fibonacci(&l);
+                            result = is_fibonacci(l);
                             printf("Is Fibonacci: %d\n", result);
                             break;
                         default:
@@ -184,10 +184,10 @@ int main() {
 
                     switch (sub_option) {
                         case 1:
-                            print_list(&l);
+                            print_list(l);
                             break;
                         case 2:
-                            print_reverse(&l);
+                            print_reverse(l);
                             break;
                         default:
                             printf("Invalid option.\n");
@@ -206,7 +206,7 @@ int main() {
                         break;
                     }
 
-                    list a = *create_list();  // a second list to test operations
+                    list *a = create_list();  // a second list to test operations
                     // it will be local to this suboption and list l must be
                     // already handled and filled before entering here Must
                     // remember when creating the functios to actually fill the
@@ -215,27 +215,27 @@ int main() {
 
                     switch (sub_option) {
                         case 1:
-                            printf("Contains all: %d\n", contains_all(&l, &a));
+                            printf("Contains all: %d\n", contains_all(l, a));
                             break;
                         case 2:
-                            printf("Lists equal: %d\n", lists_equal(&l, &a));
+                            printf("Lists equal: %d\n", lists_equal(l, a));
                             break;
                         case 3: {
-                            list result = union_lists(&l, &a);
-                            print_list(&result);
-                            free_list(&result);
+                            list *result = union_lists(l, a);
+                            print_list(result);
+                            free_list(result);
                             break;
                         }
                         case 4: {
-                            list result = intersection_lists(&l, &a);
-                            print_list(&result);
-                            free_list(&result);
+                            list *result = intersection_lists(l, a);
+                            print_list(result);
+                            free_list(result);
                             break;
                         }
                         case 5: {
-                            list result = difference_lists(&l, &a);
-                            print_list(&result);
-                            free_list(&result);
+                            list *result = difference_lists(l, a);
+                            print_list(result);
+                            free_list(result);
                             break;
                         }
                         default:
@@ -243,14 +243,14 @@ int main() {
                     }
                     // Forgot this part at first, must free the list when
                     // getting out of this submenu
-                    free_list(&a);
+                    free_list(a);
                 }
                 break;
             }
 
             case 0:
                 // Freeing the list before exiting
-                free_list(&l);
+                free_list(l);
                 printf("Exiting...\n");
                 break;
 

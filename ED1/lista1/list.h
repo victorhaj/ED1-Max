@@ -47,8 +47,8 @@ int is_fibonacci(list *l);
 int find_position(list *l, V value);
 int contains_all(list *l, list *a);
 int lists_equal(list *l, list *a);
-list union_lists(list *l, list *a);
-list intersection_lists(list *l, list *a);
-list difference_lists(list *l, list *a);
+list *union_lists(list *l, list *a);
+list *intersection_lists(list *l, list *a);
+list *difference_lists(list *l, list *a);
 
 #endif
