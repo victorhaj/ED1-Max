@@ -160,11 +160,31 @@ void clear_list(list *l) {
 }
 
 void print_list(list *l) {
-    // TODO: implement
+    if (l->size == 0) {
+        fprintf(stderr, "The list is empty, there is nothing to print.\n");
+        return;
+    }
+    for (int i = 0; i < l->size; i++) {
+        printf("%d", l->array[i]);
+        if (i < l->size - 1) {
+            printf(", ");
+        }
+    }
+    printf("\n");
 }
 
 void print_reverse(list *l) {
-    // TODO: implement
+    if (l->size == 0) {
+        fprintf(stderr, "The list is empty, there is nothing to print.\n");
+        return;
+    }
+    for (int i = l->size - 1; i >= 0; i--) {
+        printf("%d", l->array[i]);
+        if (i > 0) {
+            printf(", ");
+        }
+    }
+    printf("\n");
 }
 
 void insert_sorted(list *l, V value) {
