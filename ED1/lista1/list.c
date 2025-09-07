@@ -256,20 +256,53 @@ int lists_equal(list *l, list *a) {
 }
 
 
-list union_lists(list *l, list *a) {
-    // TODO: implement
-    list result;
+list *union_lists(list *l, list *a) {
+    list *result = create_list();
+    if (result == NULL) {
+        fprintf(stderr, "Error allocating new list.\n");
+        return NULL;
+    }
+    // it is guaranteed that it doesn't have repeated elements inside the same list
+    for (int i = 0; i < l->size; i++) {
+        insert_end(result, l->array[i]);
+    }
+    for (int i = 0; i < a->size; i++) {
+        // checking if any elements in a are not already in result
+        if (find_position(result, a->array[i]) == -1) {
+            insert_end(result, a->array[i]);
+        }
+    }
     return result;
 }
 
-list intersection_lists(list *l, list *a) {
-    // TODO: implement
-    list result;
+list *intersection_lists(list *l, list *a) {
+    list *result = create_list();
+    if (result == NULL) {
+        fprintf(stderr, "Error allocating new list.\n");
+        return NULL;
+    }
+
+    // Checks if it exists in both lists and adds it if it does
+    for (int i = 0; i < l->size; i++) {
+        if (find_position(a, l->array[i]) != -1) {
+            insert_end(result, l->array[i]);
+        }
+    }
     return result;
 }
 
-list difference_lists(list *l, list *a) {
-    // TODO: implement
-    list result;
+list *difference_lists(list *l, list *a) {
+    list *result = create_list();
+    if (result == NULL) {
+        fprintf(stderr, "Error allocating new list.\n");
+        return NULL;
+    }
+
+    // Checks if it exists in both lists and adds it if it doesn't (the opposite of the intersection)
+    for (int i = 0; i < l->size; i++) {
+        if (find_position(a, l->array[i]) != -1) {
+            insert_end(result, l->array[i]);
+        }
+    }
     return result;
 }
