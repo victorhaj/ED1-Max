@@ -2,18 +2,26 @@ CC = clang
 CFLAGS = -Wall -Wextra -Wshadow
 DEBUG_FLAGS = -O0 -g3 -fsanitize=address -fno-omit-frame-pointer
 
-SRCS = $(shell find . -type f -name '*.c')
+# All source files
+SRCS = main.c list.c
+# Object files generated from each .c
+OBJS = $(SRCS:.c=.o)
+# Name of your final executable
+TARGET = list1
 
-BINARIES = $(SRCS:.c=)
+all: $(TARGET)
 
-all: $(BINARIES)
+# Link all object files into the final binary
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET) -lm
 
-%: %.c
-	$(CC) $(CFLAGS) $< -o $@ -lm
+# Compile each .c into a .o
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 debug: CFLAGS += $(DEBUG_FLAGS)
-debug: $(BINARIES)
+debug: clean all
 
 .PHONY: clean
 clean:
-	rm -f $(BINARIES)
+	rm -f $(OBJS) $(TARGET)
