@@ -146,7 +146,17 @@ int is_empty(list *l) {
 }
 
 void clear_list(list *l) {
-    // TODO: implement
+    // I decided to go for a full wipe here of the list and reducind the capacity as well, instead of only doing the l->size=0
+    free(l->array);
+    l->array = malloc(sizeof(V) * 5);
+    if (l->array == NULL) {
+        fprintf(stderr, "Memory allocation failed when cleaning the list.\n");
+        l->capacity = 0;
+        l->size = 0;
+        return;
+    }
+    l->capacity = 5;
+    l->size = 0;
 }
 
 void print_list(list *l) {
