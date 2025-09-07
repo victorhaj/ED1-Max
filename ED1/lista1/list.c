@@ -232,14 +232,29 @@ int find_position(list *l, V value) {
 }
 
 int contains_all(list *l, list *a) {
-    // TODO: implement
-    return 0;
+    // a nested loop in disguise. the inner loop is handled by the find_position function
+    for (int i = 0; i < a->size; i++) {
+        int position = find_position(l, a->array[i]);
+        if (position == -1) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 int lists_equal(list *l, list *a) {
-    // TODO: implement
+    // if they don't have the same size, no need to search further
+    if (l->size != a->size) {
+        return 0;
+    }
+
+    // using the function contains_all to avoid rework
+    if (contains_all(l, a) && contains_all(a, l)) {
+        return 1;
+    }
     return 0;
 }
+
 
 list union_lists(list *l, list *a) {
     // TODO: implement
