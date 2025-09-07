@@ -9,7 +9,7 @@ void print_print_menu();
 void print_advanced_menu();
 
 int main() {
-    list l = create_list();
+    list l = *create_list();
     int main_option = -1;
 
     while (main_option != 0) {
@@ -206,7 +206,7 @@ int main() {
                         break;
                     }
 
-                    list a = create_list();  // a second list to test operations
+                    list a = *create_list();  // a second list to test operations
                     // it will be local to this suboption and list l must be
                     // already handled and filled before entering here Must
                     // remember when creating the functios to actually fill the

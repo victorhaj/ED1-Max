@@ -22,7 +22,7 @@ struct _list {
 // === Function Prototypes ===
 
 // Base functions
-list create_list();
+list *create_list();
 void free_list(list *l);
 void insert_end(list *l, V value);
 void insert_start(list *l, V value);

@@ -1,13 +1,30 @@
 #include "list.h"
 
-list create_list() {
-    // TODO: implement
-    list l;
+list *create_list() {
+    list *l = malloc(sizeof(list));
+    if (l == NULL) {
+        fprintf(stderr, "Error allocating new list.\n");
+        return NULL;
+    }
+    l->size = 0;
+    l->capacity = 5;
+    l->array = malloc(sizeof(V) * l->capacity);
+    if (l->array == NULL) {
+        fprintf(stderr, "Error allocating new list.\n");
+        free_list(l);
+        return NULL;
+    }
+
     return l;
 }
 
 void free_list(list *l) {
-    // TODO: implement
+    if (l == NULL) {
+        fprintf(stderr, "List is already NULL.\n");   
+        return;     
+    }
+    free(l->array);
+    free(l);
 }
 
 void insert_end(list *l, V value) {
