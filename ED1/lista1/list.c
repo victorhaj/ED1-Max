@@ -188,12 +188,27 @@ void print_reverse(list *l) {
 }
 
 void insert_sorted(list *l, V value) {
-    // TODO: implement
+    if (l->size == 0) {
+        insert_at(l, value, 0);
+        return;
+    }
+    int i = 0;
+    while (i < l->size && l->array[i] < value) {
+        i++;
+    }
+    insert_at(l, value, i);
 }
 
 int is_sorted(list *l) {
-    // TODO: implement
-    return 0;
+    if (l->size == 0 || l->size == 1) {
+        return 1;
+    }
+    for (int i = 0; i < l->size - 1; i++) {
+        if (l->array[i] > l->array[i + 1]) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 int is_fibonacci(list *l) {
