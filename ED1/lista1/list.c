@@ -210,7 +210,15 @@ int is_fibonacci(list *l) {
 }
 
 int find_position(list *l, V value) {
-    // TODO: implement
+    if (l == NULL || l->size == 0) {
+        return -1;
+    }
+
+    for (int i = 0; i < l->size; i++) {
+        if (l->array[i] == value) {
+            return i;
+        }
+    }
     return -1;
 }
 

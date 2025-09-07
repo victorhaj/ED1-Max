@@ -130,7 +130,11 @@ int main() {
                             printf("Enter value to search: ");
                             scanf("%d", &value);
                             index = find_position(l, value);
-                            printf("Position: %d\n", index);
+                            if (index == -1) {
+                                printf("Value %d not found in the list.\n", value);
+                            } else {
+                                printf("First occurrence of %d is at position %d.\n", value, index);
+                            }
                             break;
                         default:
                             printf("Invalid option.\n");
