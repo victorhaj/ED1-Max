@@ -28,15 +28,52 @@ void free_list(list *l) {
 }
 
 void insert_end(list *l, V value) {
-    // TODO: implement
+    insert_at(l, value, l->size);
 }
 
 void insert_start(list *l, V value) {
-    // TODO: implement
+    insert_at(l, value, 0);
 }
 
 void insert_at(list *l, V value, int index) {
-    // TODO: implement
+    if (index < 0 || index > l->size) {
+        fprintf(stderr, "Invalid index %d. Valid range: 0 to %d\n", index, l->size);
+        return;
+    }
+
+    // Block for resizing (if needed) and inserting when this happen
+    if (l->size == l->capacity) {
+        // gows 10% + 1(to ensure it grows at minus 10 capacity)
+        int new_capacity = (int)(l->capacity * 1.1) + 1;
+        V *new_array = malloc(sizeof(V) * new_capacity);
+        if (new_array == NULL) {
+            fprintf(stderr, "Memory allocation failed during resizing.\n");
+            return;
+        }
+
+        // Now we will copy the elements and insert the new value during the copying process
+        for (int i = 0; i < index; i++) {
+            new_array[i] = l->array[i];
+        }
+        new_array[index] = value;
+        for (int i = index; i < l->size; i++) {
+            new_array[i + 1] = l->array[i];
+        }
+
+        // now for the cleanup
+        free(l->array);
+        l->array = new_array;
+        l->capacity = new_capacity;
+        l->size++;
+        return;
+    }
+
+    // if no resizing is needed, just shift to the right and insert new element
+    for (int i = l->size; i > index; i--) {
+        l->array[i] = l->array[i - 1];
+    }
+    l->array = value;
+    l->size++;
 }
 
 void update_at(list *l, V value, int index) {
