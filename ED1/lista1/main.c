@@ -202,6 +202,12 @@ int main() {
 
             // ADVANCED OPERATIONS
             case 6: {
+                list *a = create_list();  
+                // a second list to test operations
+                if (a == NULL) {
+                    fprintf(stderr, "Failed to create the auxiliary list.\n");
+                    break;
+                }
                 int sub_option = -1;
                 while (sub_option != 0) {
                     print_advanced_menu();
@@ -210,12 +216,23 @@ int main() {
                         break;
                     }
 
-                    list *a = create_list();  // a second list to test operations
-                    // it will be local to this suboption and list l must be
-                    // already handled and filled before entering here Must
-                    // remember when creating the functios to actually fill the
-                    // second functions somehow Maybe call repeatedly the insert
-                    // function?
+                    // Ask user if they want to fill 'a' before operations
+                    if (sub_option >= 1 && sub_option <= 5 && a->size == 0) {
+                        int fillOption = 0;
+                        printf("The secondary list is empty. Do you want to fill it? (1 = yes, 0 = no): ");
+                        scanf("%d", &fillOption);
+                        if (fillOption == 1) {
+                            int n;
+                            printf("How many elements to add to the secondary list? ");
+                            scanf("%d", &n);
+                            for (int i = 0; i < n; i++) {
+                                V value;
+                                printf("Enter value %d: ", i + 1);
+                                scanf("%d", &value);
+                                insert_end(a, value);
+                            }
+                        }
+                    }
 
                     switch (sub_option) {
                         case 1:
@@ -245,10 +262,10 @@ int main() {
                         default:
                             printf("Invalid option.\n");
                     }
-                    // Forgot this part at first, must free the list when
-                    // getting out of this submenu
-                    free_list(&a);
                 }
+                // Forgot this part at first, must free the list when
+                // getting out of this submenu
+                free_list(&a);
                 break;
             }
 
