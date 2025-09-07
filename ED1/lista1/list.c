@@ -109,18 +109,32 @@ V get_at(list *l, int index) {
 }
 
 V remove_first(list *l) {
-    // TODO: implement
-    return 0;
+    if (l->size == 0) {
+        fprintf(stderr, "The list is empty and nothing can be removed\n");
+        return 0;
+    }
+    return remove_at(l, 0);
 }
 
 V remove_last(list *l) {
-    // TODO: implement
-    return 0;
+    if (l->size == 0) {
+        fprintf(stderr, "The list is empty and nothing can be removed\n");
+        return 0;
+    }
+    return remove_at(l, l->size - 1);
 }
 
 V remove_at(list *l, int index) {
-    // TODO: implement
-    return 0;
+    if (index < 0 || index >= l->size) {
+        fprintf(stderr, "Invalid index %d. Valid range: 0 to %d\n", index, l->size - 1);
+        return 0;
+    }
+    int value_removed = l->array[index];
+    for (int i = index; i < l->size - 1; i++) {
+        l->array[i] = l->array[i + 1];
+    }
+    l->size--;
+    return value_removed;
 }
 
 int list_size(list *l) {
