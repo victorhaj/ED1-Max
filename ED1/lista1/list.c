@@ -138,13 +138,11 @@ V remove_at(list *l, int index) {
 }
 
 int list_size(list *l) {
-    // TODO: implement
-    return 0;
+    return l->size;
 }
 
 int is_empty(list *l) {
-    // TODO: implement
-    return 0;
+    return l->size == 0;
 }
 
 void clear_list(list *l) {
