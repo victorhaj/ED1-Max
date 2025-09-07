@@ -77,22 +77,35 @@ void insert_at(list *l, V value, int index) {
 }
 
 void update_at(list *l, V value, int index) {
-    // TODO: implement
+    if (index < 0 || index > l->size) {
+        fprintf(stderr, "Invalid index %d. Valid range: 0 to %d\n", index, l->size);
+        return;
+    }
+    l->array[index] = value;
 }
 
 V get_first(list *l) {
-    // TODO: implement
-    return 0;
+    if (l->size == 0) {
+        fprintf(stderr, "List is empty\n");
+        return 0;
+    }
+    get_at(l, 0);
 }
 
 V get_last(list *l) {
-    // TODO: implement
-    return 0;
+    if (l->size == 0) {
+        fprintf(stderr, "List is empty\n");
+        return 0;
+    }
+    get_at(l, l->size - 1);
 }
 
 V get_at(list *l, int index) {
-    // TODO: implement
-    return 0;
+    if (index < 0 || index >= l-> size) {
+        fprintf(stderr, "Invalid index %d. Valid range is 0 to %s.\n", index, l->size - 1);
+        return 0;
+    }
+    return l->array[index];
 }
 
 V remove_first(list *l) {
