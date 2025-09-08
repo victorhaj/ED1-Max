@@ -14,7 +14,7 @@ int main() {
 
     while (main_option != 0) {
         print_main_menu();
-        scanf("%d", &main_option);
+        main_option = get_int("Choose an option: ");
 
         switch (main_option) {
             // INSERT OPERATIONS
@@ -22,7 +22,7 @@ int main() {
                 int sub_option = -1;
                 while (sub_option != 0) {
                     print_insert_menu();
-                    scanf("%d", &sub_option);
+                    sub_option = get_int("Choose an option: ");
                     if (sub_option == 0) {
                         break;
                     }
@@ -31,25 +31,20 @@ int main() {
                     int index;
                     switch (sub_option) {
                         case 1:
-                            printf("Enter value: ");
-                            scanf("%d", &value);
+                            value = get_int("Enter value: ");
                             insert_end(l, value);
                             break;
                         case 2:
-                            printf("Enter value: ");
-                            scanf("%d", &value);
+                            value = get_int("Enter value: ");
                             insert_start(l, value);
                             break;
                         case 3:
-                            printf("Enter value: ");
-                            scanf("%d", &value);
-                            printf("Enter index: ");
-                            scanf("%d", &index);
+                            value = get_int("Enter value: ");
+                            index = get_int("Enter index: ");
                             insert_at(l, value, index);
                             break;
                         case 4:
-                            printf("Enter value: ");
-                            scanf("%d", &value);
+                            value = get_int("Enter value: ");
                             insert_sorted(l, value);
                             break;
                         default:
@@ -64,7 +59,7 @@ int main() {
                 int sub_option = -1;
                 while (sub_option != 0) {
                     print_remove_menu();
-                    scanf("%d", &sub_option);
+                    sub_option = get_int("Choose an option: ");
                     if (sub_option == 0) {
                         break;
                     }
@@ -78,8 +73,7 @@ int main() {
                             remove_last(l);
                             break;
                         case 3:
-                            printf("Enter index: ");
-                            scanf("%d", &index);
+                            index = get_int("Enter index: ");
                             remove_at(l, index);
                             break;
                         case 4:
@@ -97,7 +91,7 @@ int main() {
                 int sub_option = -1;
                 while (sub_option != 0) {
                     print_get_update_menu();
-                    scanf("%d", &sub_option);
+                    sub_option = get_int("Choose an option: ");
                     if (sub_option == 0) {
                         break;
                     }
@@ -114,21 +108,17 @@ int main() {
                             printf("Last value: %d\n", value);
                             break;
                         case 3:
-                            printf("Enter index: ");
-                            scanf("%d", &index);
+                            index = get_int("Enter index: ");
                             value = get_at(l, index);
                             printf("Value at index %d: %d\n", index, value);
                             break;
                         case 4:
-                            printf("Enter new value: ");
-                            scanf("%d", &value);
-                            printf("Enter index: ");
-                            scanf("%d", &index);
+                            value = get_int("Enter new value: ");
+                            index = get_int("Enter index: ");
                             update_at(l, value, index);
                             break;
                         case 5:
-                            printf("Enter value to search: ");
-                            scanf("%d", &value);
+                            value = get_int("Enter value to search: ");
                             index = find_position(l, value);
                             if (index == -1) {
                                 printf("Value %d not found in the list.\n", value);
@@ -148,7 +138,7 @@ int main() {
                 int sub_option = -1;
                 while (sub_option != 0) {
                     print_check_menu();
-                    scanf("%d", &sub_option);
+                    sub_option = get_int("Choose an option: ");
                     if (sub_option == 0) {
                         break;
                     }
@@ -181,7 +171,7 @@ int main() {
                 int sub_option = -1;
                 while (sub_option != 0) {
                     print_print_menu();
-                    scanf("%d", &sub_option);
+                    sub_option = get_int("Choose an option: ");
                     if (sub_option == 0) {
                         break;
                     }
@@ -211,7 +201,7 @@ int main() {
                 int sub_option = -1;
                 while (sub_option != 0) {
                     print_advanced_menu();
-                    scanf("%d", &sub_option);
+                    sub_option = get_int("Choose an option: ");
                     if (sub_option == 0) {
                         break;
                     }
@@ -220,15 +210,14 @@ int main() {
                     if (sub_option >= 1 && sub_option <= 5 && a->size == 0) {
                         int fillOption = 0;
                         printf("The secondary list is empty. Do you want to fill it? (1 = yes, 0 = no): ");
-                        scanf("%d", &fillOption);
+                        fillOption = get_int("Choose an option: ");
                         if (fillOption == 1) {
                             int n;
-                            printf("How many elements to add to the secondary list? ");
-                            scanf("%d", &n);
+                            n = get_int("How many elements to add to the secondary list? ");
                             for (int i = 0; i < n; i++) {
                                 V value;
                                 printf("Enter value %d: ", i + 1);
-                                scanf("%d", &value);
+                                value = get_int(" ");
                                 insert_end(a, value);
                             }
                         }
