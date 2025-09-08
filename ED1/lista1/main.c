@@ -121,9 +121,13 @@ int main() {
                             value = get_int("Enter value to search: ");
                             index = find_position(l, value);
                             if (index == -1) {
-                                printf("Value %d not found in the list.\n", value);
+                                printf("Value %d not found in the list.\n",
+                                       value);
                             } else {
-                                printf("First occurrence of %d is at position %d.\n", value, index);
+                                printf(
+                                    "First occurrence of %d is at position "
+                                    "%d.\n",
+                                    value, index);
                             }
                             break;
                         default:
@@ -192,7 +196,7 @@ int main() {
 
             // ADVANCED OPERATIONS
             case 6: {
-                list *a = create_list();  
+                list *a = create_list();
                 // a second list to test operations
                 if (a == NULL) {
                     fprintf(stderr, "Failed to create the auxiliary list.\n");
@@ -209,11 +213,15 @@ int main() {
                     // Ask user if they want to fill 'a' before operations
                     if (sub_option >= 1 && sub_option <= 5 && a->size == 0) {
                         int fillOption = 0;
-                        printf("The secondary list is empty. Do you want to fill it? (1 = yes, 0 = no): ");
+                        printf(
+                            "The secondary list is empty. Do you want to fill "
+                            "it? (1 = yes, 0 = no): ");
                         fillOption = get_int("Choose an option: ");
                         if (fillOption == 1) {
                             int n;
-                            n = get_int("How many elements to add to the secondary list? ");
+                            n = get_int(
+                                "How many elements to add to the secondary "
+                                "list? ");
                             for (int i = 0; i < n; i++) {
                                 V value;
                                 printf("Enter value %d: ", i + 1);

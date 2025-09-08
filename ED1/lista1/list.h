@@ -1,10 +1,10 @@
 #ifndef LIST_H
 #define LIST_H
 
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
 #define V int
 
@@ -23,7 +23,8 @@ struct _list {
 
 // === Function Prototypes ===
 
-// helper function so I can avoid scanf shenanigans and can get something like CS50 get_int
+// helper function so I can avoid scanf shenanigans and can get something like
+// CS50 get_int
 int get_int(const char *prompt);
 
 // Base functions

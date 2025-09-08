@@ -5,7 +5,7 @@
 int get_int(const char *prompt) {
     int value = 0;
     char buffer[SIZE_BUFFER];
-    while(1) {
+    while (1) {
         printf("%s", prompt);
         if (fgets(buffer, sizeof(buffer), stdin) != NULL) {
             char *endptr;
@@ -15,15 +15,15 @@ int get_int(const char *prompt) {
             while (*endptr == ' ' || *endptr == '\t') endptr++;
             // check for the end
             if (*endptr == '\0' || *endptr == '\n') {
-                return value; // if it is a valid integer
-                } else {
-                    printf("Invalid input. Please enter an integer.\n");
-                }
+                return value;  // if it is a valid integer
             } else {
-                // EOF encountered
-                printf("Error reading input.\n");
-                exit(1);
+                printf("Invalid input. Please enter an integer.\n");
             }
+        } else {
+            // EOF encountered
+            printf("Error reading input.\n");
+            exit(1);
+        }
     }
 }
 
@@ -45,29 +45,31 @@ list *create_list() {
     return l;
 }
 
-// When debugging this function It was apparent that I wan't actually acessing the point to free it, and It seems like I need to use a pointer to pointer to properly acess it and free it
+// When debugging this function It was apparent that I wan't actually acessing
+// the point to free it, and It seems like I need to use a pointer to pointer to
+// properly acess it and free it
 void free_list(list **l) {
     if (l == NULL || *l == NULL) {
-        fprintf(stderr, "List is already NULL.\n");   
-        return;     
+        fprintf(stderr, "List is already NULL.\n");
+        return;
     }
     free((*l)->array);
     free((*l));
-    // avoid dangling pointer. Not really a problem here, but it's good practice, and if I understood it right, the way I implement with full freedom to choose functions can actually cause the dangling pointer. Must remember to ask Max
-    *l = NULL;  
+    // avoid dangling pointer. Not really a problem here, but it's good
+    // practice, and if I understood it right, the way I implement with full
+    // freedom to choose functions can actually cause the dangling pointer. Must
+    // remember to ask Max
+    *l = NULL;
 }
 
-void insert_end(list *l, V value) {
-    insert_at(l, value, l->size);
-}
+void insert_end(list *l, V value) { insert_at(l, value, l->size); }
 
-void insert_start(list *l, V value) {
-    insert_at(l, value, 0);
-}
+void insert_start(list *l, V value) { insert_at(l, value, 0); }
 
 void insert_at(list *l, V value, int index) {
     if (index < 0 || index > l->size) {
-        fprintf(stderr, "Invalid index %d. Valid range: 0 to %d\n", index, l->size);
+        fprintf(stderr, "Invalid index %d. Valid range: 0 to %d\n", index,
+                l->size);
         return;
     }
 
@@ -81,7 +83,8 @@ void insert_at(list *l, V value, int index) {
             return;
         }
 
-        // Now we will copy the elements and insert the new value during the copying process
+        // Now we will copy the elements and insert the new value during the
+        // copying process
         for (int i = 0; i < index; i++) {
             new_array[i] = l->array[i];
         }
@@ -108,7 +111,8 @@ void insert_at(list *l, V value, int index) {
 
 void update_at(list *l, V value, int index) {
     if (index < 0 || index >= l->size) {
-        fprintf(stderr, "Invalid index %d. Valid range: 0 to %d\n", index, l->size);
+        fprintf(stderr, "Invalid index %d. Valid range: 0 to %d\n", index,
+                l->size);
         return;
     }
     l->array[index] = value;
@@ -131,8 +135,9 @@ V get_last(list *l) {
 }
 
 V get_at(list *l, int index) {
-    if (index < 0 || index >= l-> size) {
-        fprintf(stderr, "Invalid index %d. Valid range is 0 to %d.\n", index, l->size - 1);
+    if (index < 0 || index >= l->size) {
+        fprintf(stderr, "Invalid index %d. Valid range is 0 to %d.\n", index,
+                l->size - 1);
         return 0;
     }
     return l->array[index];
@@ -156,7 +161,8 @@ V remove_last(list *l) {
 
 V remove_at(list *l, int index) {
     if (index < 0 || index >= l->size) {
-        fprintf(stderr, "Invalid index %d. Valid range: 0 to %d\n", index, l->size - 1);
+        fprintf(stderr, "Invalid index %d. Valid range: 0 to %d\n", index,
+                l->size - 1);
         return 0;
     }
     int value_removed = l->array[index];
@@ -167,16 +173,13 @@ V remove_at(list *l, int index) {
     return value_removed;
 }
 
-int list_size(list *l) {
-    return l->size;
-}
+int list_size(list *l) { return l->size; }
 
-int is_empty(list *l) {
-    return l->size == 0;
-}
+int is_empty(list *l) { return l->size == 0; }
 
 void clear_list(list *l) {
-    // I had first gone for a full wipe here, but I decided to separate responsibilities, and if I want a full wipe I will use free_list
+    // I had first gone for a full wipe here, but I decided to separate
+    // responsibilities, and if I want a full wipe I will use free_list
     l->size = 0;
 }
 
@@ -260,7 +263,8 @@ int find_position(list *l, V value) {
 }
 
 int contains_all(list *l, list *a) {
-    // a nested loop in disguise. the inner loop is handled by the find_position function
+    // a nested loop in disguise. the inner loop is handled by the find_position
+    // function
     for (int i = 0; i < a->size; i++) {
         int position = find_position(l, a->array[i]);
         if (position == -1) {
@@ -283,14 +287,14 @@ int lists_equal(list *l, list *a) {
     return 0;
 }
 
-
 list *union_lists(list *l, list *a) {
     list *result = create_list();
     if (result == NULL) {
         fprintf(stderr, "Error allocating new list.\n");
         return NULL;
     }
-    // it is guaranteed that it doesn't have repeated elements inside the same list
+    // it is guaranteed that it doesn't have repeated elements inside the same
+    // list
     for (int i = 0; i < l->size; i++) {
         insert_end(result, l->array[i]);
     }
@@ -326,7 +330,8 @@ list *difference_lists(list *l, list *a) {
         return NULL;
     }
 
-    // Checks if it exists in both lists and adds it if it doesn't (the opposite of the intersection)
+    // Checks if it exists in both lists and adds it if it doesn't (the opposite
+    // of the intersection)
     for (int i = 0; i < l->size; i++) {
         if (find_position(a, l->array[i]) == -1) {
             insert_end(result, l->array[i]);
