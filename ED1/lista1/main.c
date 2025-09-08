@@ -281,7 +281,6 @@ void print_main_menu() {
     printf("5 - Print operations\n");
     printf("6 - Advanced operations (compare / combine)\n");
     printf("0 - Exit\n");
-    printf("Choose an option: ");
 }
 
 void print_insert_menu() {
@@ -291,7 +290,6 @@ void print_insert_menu() {
     printf("3 - Insert at position\n");
     printf("4 - Insert sorted\n");
     printf("0 - Back\n");
-    printf("Choose an option: ");
 }
 
 void print_remove_menu() {
@@ -301,7 +299,6 @@ void print_remove_menu() {
     printf("3 - Remove at position\n");
     printf("4 - Clear list\n");
     printf("0 - Back\n");
-    printf("Choose an option: ");
 }
 
 void print_get_update_menu() {
@@ -312,7 +309,6 @@ void print_get_update_menu() {
     printf("4 - Update at position\n");
     printf("5 - Find position by value\n");
     printf("0 - Back\n");
-    printf("Choose an option: ");
 }
 
 void print_check_menu() {
@@ -322,7 +318,6 @@ void print_check_menu() {
     printf("3 - Is sorted\n");
     printf("4 - Is Fibonacci\n");
     printf("0 - Back\n");
-    printf("Choose an option: ");
 }
 
 void print_print_menu() {
@@ -330,7 +325,6 @@ void print_print_menu() {
     printf("1 - Print list\n");
     printf("2 - Print list reversed\n");
     printf("0 - Back\n");
-    printf("Choose an option: ");
 }
 
 void print_advanced_menu() {
@@ -341,5 +335,4 @@ void print_advanced_menu() {
     printf("4 - Intersection of two lists\n");
     printf("5 - Difference of two lists\n");
     printf("0 - Back\n");
-    printf("Choose an option: ");
 }
