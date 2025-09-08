@@ -22,9 +22,10 @@ struct _list {
 // === Function Prototypes ===
 
 // helper function so I can avoid scanf shenanigans and can get something like CS50 get_int
-list *create_list();
+int get_int(const char *prompt);
 
 // Base functions
+list *create_list();
 void free_list(list **l);
 void insert_end(list *l, V value);
 void insert_start(list *l, V value);
