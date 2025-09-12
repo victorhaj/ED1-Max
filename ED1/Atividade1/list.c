@@ -71,16 +71,16 @@ void insert_at(list *l, int index) {
     printf("Digite o nome da tarefa: ");
     scanf("%[^\n]",descricao_temporario1);
     if(index == 1){
-        for(int i = l->n;i>0;i--){
-        l->vet[i]=l->vet[i-1];
+        for(int i = l->size;i>0;i--){
+        l->array[i]=l->array[i-1];
     }
     strcpy(l->array[0].nome, nome_temporario1);
     strcpy(l->array[0].descr, descricao_temporario1);
-    l->n++;
+    l->size++;
     }else{
-        strcpy(l->array[l->n].nome, nome_temporario1);
-        strcpy(l->array[l->n].descr, descricao_temporario1);
-        l->n++;
+        strcpy(l->array[l->size].nome, nome_temporario1);
+        strcpy(l->array[l->size].descr, descricao_temporario1);
+        l->size++;
     }
     
 
