@@ -69,9 +69,9 @@ void insert_at(list *l, int index) {
     char descricao_temporario1[TAM_NOME];
 
     printf("Digite o nome da tarefa: ");
-    scanf("%[^\n]",nome_temporario1);
+    scanf(" %[^\n]",nome_temporario1);
     printf("Digite o nome da tarefa: ");
-    scanf("%[^\n]",descricao_temporario1);
+    scanf(" %[^\n]",descricao_temporario1);
     if(index == 1){
         for(int i = l->size;i>0;i--){
         l->array[i]=l->array[i-1];
@@ -130,4 +130,27 @@ void invert_list(list *l) {
 
 }
 
+int get_int(const char *prompt) {
+    int value = 0;
+    char buffer[SIZE_BUFFER];
+    while (1) {
+        printf("%s", prompt);
+        if (fgets(buffer, sizeof(buffer), stdin) != NULL) {
+            char *endptr;
+            value = strtol(buffer, &endptr, 10);
 
+            // let's skip whitespace
+            while (*endptr == ' ' || *endptr == '\t') endptr++;
+            // check for the end
+            if (*endptr == '\0' || *endptr == '\n') {
+                return value;  // if it is a valid integer
+            } else {
+                printf("Invalid input. Please enter an integer.\n");
+            }
+        } else {
+            // EOF encountered
+            printf("Error reading input.\n");
+            exit(1);
+        }
+    }
+}

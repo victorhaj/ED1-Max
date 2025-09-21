@@ -30,7 +30,7 @@ int main() {
                 invert_list(&l);
                 break;
             case 5: //imprime
-                print_list(&l);
+                print_list(l);
                 break;
             case 6: //encerra
                 free_list(&l);

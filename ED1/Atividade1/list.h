@@ -48,4 +48,6 @@ void remove_at(list *l);
 void print_list(list *l);
 void invert_list(list *l);
 
-#endif;
+int get_int(const char *prompt);
+
+#endif
