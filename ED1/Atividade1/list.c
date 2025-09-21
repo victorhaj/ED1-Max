@@ -1,5 +1,7 @@
 #include "list.h"
 
+//Eu estive aqui =)
+
 #define SIZE_BUFFER 101
 
 list *create_list() {
